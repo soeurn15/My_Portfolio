@@ -1,0 +1,86 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="70" x2="1080" y2="730" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1B1034"/>
+      <stop offset="0.55" stop-color="#31214F"/>
+      <stop offset="1" stop-color="#5E2C74"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="320" y1="160" x2="920" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8FD"/>
+      <stop offset="1" stop-color="#F0E7F5"/>
+    </linearGradient>
+    <linearGradient id="pink" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F9A8D4"/>
+      <stop offset="1" stop-color="#DB2777"/>
+    </linearGradient>
+    <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#C4B5FD"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#5EEAD4"/>
+      <stop offset="1" stop-color="#14B8A6"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1200" height="800" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="18" stdDeviation="28" flood-color="#10071E" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="800" rx="48" fill="url(#bg)"/>
+  <circle cx="170" cy="150" r="120" fill="#F9A8D4" fill-opacity="0.12"/>
+  <circle cx="1030" cy="130" r="160" fill="#5EEAD4" fill-opacity="0.09"/>
+  <circle cx="980" cy="680" r="180" fill="#C4B5FD" fill-opacity="0.10"/>
+
+  <g filter="url(#shadow)">
+    <rect x="110" y="110" width="980" height="580" rx="36" fill="url(#panel)"/>
+  </g>
+
+  <rect x="150" y="150" width="900" height="74" rx="22" fill="#1F1530"/>
+  <circle cx="188" cy="187" r="12" fill="#FB7185"/>
+  <circle cx="224" cy="187" r="12" fill="#FBBF24"/>
+  <circle cx="260" cy="187" r="12" fill="#34D399"/>
+  <rect x="330" y="172" width="280" height="28" rx="14" fill="#412D60"/>
+  <rect x="630" y="172" width="130" height="28" rx="14" fill="#412D60"/>
+  <rect x="780" y="172" width="180" height="28" rx="14" fill="#412D60"/>
+
+  <rect x="150" y="260" width="260" height="390" rx="28" fill="#201434"/>
+  <text x="180" y="310" fill="#FFF8FD" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">C# Web API</text>
+  <rect x="180" y="338" width="200" height="42" rx="14" fill="#31214F"/>
+  <rect x="180" y="392" width="200" height="42" rx="14" fill="#31214F"/>
+  <rect x="180" y="446" width="200" height="42" rx="14" fill="#31214F"/>
+  <rect x="180" y="500" width="200" height="42" rx="14" fill="#31214F"/>
+  <rect x="180" y="554" width="200" height="42" rx="14" fill="#31214F"/>
+  <rect x="200" y="350" width="44" height="18" rx="9" fill="url(#pink)"/>
+  <rect x="200" y="404" width="62" height="18" rx="9" fill="url(#violet)"/>
+  <rect x="200" y="458" width="52" height="18" rx="9" fill="url(#teal)"/>
+  <rect x="200" y="512" width="72" height="18" rx="9" fill="url(#pink)"/>
+  <rect x="200" y="566" width="56" height="18" rx="9" fill="url(#violet)"/>
+
+  <rect x="436" y="260" width="634" height="182" rx="28" fill="#FFF8FD"/>
+  <text x="466" y="306" fill="#1F1530" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">Authentication Endpoint</text>
+  <text x="466" y="338" fill="#73607F" font-family="Arial, Helvetica, sans-serif" font-size="16">JWT secured routes, CRUD operations, and Swagger docs.</text>
+  <rect x="466" y="360" width="160" height="46" rx="14" fill="#F3E8FF"/>
+  <text x="490" y="389" fill="#7C3AED" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GET /api/books</text>
+  <rect x="642" y="360" width="160" height="46" rx="14" fill="#FCE7F3"/>
+  <text x="666" y="389" fill="#DB2777" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">POST /login</text>
+  <rect x="818" y="360" width="160" height="46" rx="14" fill="#E6FFFB"/>
+  <text x="846" y="389" fill="#0F766E" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">Swagger UI</text>
+
+  <rect x="436" y="466" width="294" height="184" rx="28" fill="#1F1530"/>
+  <text x="466" y="512" fill="#FFF8FD" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">JSON Response</text>
+  <rect x="466" y="534" width="232" height="18" rx="9" fill="#35244F"/>
+  <rect x="466" y="534" width="170" height="18" rx="9" fill="url(#violet)"/>
+  <rect x="466" y="568" width="232" height="18" rx="9" fill="#35244F"/>
+  <rect x="466" y="568" width="138" height="18" rx="9" fill="url(#teal)"/>
+  <rect x="466" y="602" width="232" height="18" rx="9" fill="#35244F"/>
+  <rect x="466" y="602" width="92" height="18" rx="9" fill="url(#pink)"/>
+
+  <rect x="748" y="466" width="322" height="184" rx="28" fill="#FFF8FD"/>
+  <text x="778" y="510" fill="#1F1530" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">Data Flow</text>
+  <path d="M780 555C820 520 870 520 910 555C950 590 1000 590 1030 560" stroke="#7C3AED" stroke-width="10" stroke-linecap="round"/>
+  <path d="M780 590C826 555 872 555 918 590C962 624 1008 624 1030 600" stroke="#DB2777" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="782" cy="555" r="10" fill="url(#violet)"/>
+  <circle cx="1030" cy="560" r="10" fill="url(#violet)"/>
+  <circle cx="782" cy="590" r="10" fill="url(#pink)"/>
+  <circle cx="1030" cy="600" r="10" fill="url(#pink)"/>
+</svg>
