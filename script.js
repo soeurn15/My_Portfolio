@@ -276,3 +276,57 @@ projectCards.forEach(card => {
 */
 
 console.log('Portfolio loaded successfully! 🚀');
+
+// ==================== DOWNLOAD CV (mobile-friendly fallback) ====================
+const downloadCvBtn = document.getElementById('downloadCv');
+
+if (downloadCvBtn) {
+    downloadCvBtn.addEventListener('click', async (e) => {
+        const url = downloadCvBtn.getAttribute('href');
+        const isMobile = /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
+        // On mobile browsers, let the browser handle opening the PDF in a new tab/window immediately.
+        if (isMobile) {
+            // ensure opens in a new tab
+            window.open(url, '_blank', 'noopener');
+            return;
+        }
+
+        // On desktop, attempt fetch+blob fallback if needed, but prevent default so we can control download
+        e.preventDefault();
+        try {
+            const resp = await fetch(url);
+            if (!resp.ok) throw new Error('Network response was not ok');
+            const blob = await resp.blob();
+            const blobUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = blobUrl;
+            a.download = 'song-soeurn-cv.pdf';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(blobUrl);
+        } catch (err) {
+            console.warn('Download fallback failed, opening in new tab', err);
+            window.open(url, '_blank', 'noopener');
+        }
+    });
+}
+
+// ==================== GET IN TOUCH BUTTON (ensure mobile scroll + close menu)
+const getInTouchBtn = document.getElementById('getInTouchBtn');
+if (getInTouchBtn) {
+    getInTouchBtn.addEventListener('click', (e) => {
+        // Default anchor scrolling handled elsewhere; ensure mobile menu is closed and smooth scroll.
+        e.preventDefault();
+        const target = document.querySelector('#contact');
+        if (target) {
+            const offsetTop = target.offsetTop - 70;
+            window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+        }
+        // Close mobile menu if open
+        if (navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            mobileToggle.classList.remove('active');
+        }
+    });
+}
