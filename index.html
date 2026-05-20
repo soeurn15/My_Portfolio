@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio of Song Soeurn - Web Developer">
     <title>Song Soeurn| Portfolio</title>
+    <!-- Normalize for consistent baseline across browsers -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -23,7 +25,8 @@
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                 <i class="fas fa-moon"></i>
             </button>
-            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-controls="navMenu" aria-expanded="false">
+                
                 <span></span>
                 <span></span>
                 <span></span>
@@ -373,6 +376,8 @@
         </div>
     </footer>
 
+    <!-- body-scroll-lock: improves scroll locking behavior on iOS/Android -->
+    <script src="https://unpkg.com/body-scroll-lock/lib/bodyScrollLock.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

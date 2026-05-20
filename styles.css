@@ -213,6 +213,8 @@ img {
     border-radius: 50%;
     filter: blur(60px);
     animation: float 20s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .hero::after {
@@ -227,13 +229,15 @@ img {
     border-radius: 50%;
     filter: blur(60px);
     animation: float 15s ease-in-out infinite reverse;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .hero-content {
     max-width: 900px;
     animation: fadeInUp 1s ease;
     position: relative;
-    z-index: 1;
+    z-index: 5;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -271,7 +275,7 @@ img {
     inset: -8px;
     background: var(--primary-gradient);
     border-radius: 50%;
-    z-index: 1;
+    z-index: 0;
     animation: rotate 8s linear infinite;
 }
 
@@ -294,6 +298,7 @@ img {
     border-radius: 50%;
     z-index: 0;
     animation: pulse 3s ease-in-out infinite;
+    pointer-events: none;
 }
 
 .hero-image:hover img {
@@ -1022,6 +1027,83 @@ section {
 }
 
 /* ==================== RESPONSIVE ==================== */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+        padding: 0 28px;
+    }
+
+    .hero-title {
+        font-size: 4.5rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .footer .container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .hero-title {
+        font-size: 3.5rem;
+    }
+
+    .hero-image {
+        width: 260px;
+        height: 260px;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 991px) {
+    .container {
+        padding: 0 22px;
+    }
+
+    .hero {
+        padding: 110px 20px 40px;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.6rem;
+    }
+
+    .hero-image {
+        width: 220px;
+        height: 220px;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .projects-grid,
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .mobile-toggle {
         display: flex;
@@ -1044,6 +1126,20 @@ section {
         opacity: 0;
         pointer-events: none;
         z-index: 900;
+    }
+
+    /* Ensure mobile controls are on top and buttons remain clickable */
+    .mobile-toggle {
+        z-index: 1300;
+    }
+
+    .nav-menu.active {
+        z-index: 1250;
+    }
+
+    .hero-buttons {
+        position: relative;
+        z-index: 2;
     }
 
     .nav-menu.active {
@@ -1079,6 +1175,46 @@ section {
     .hero-image-wrapper {
         margin-bottom: 2rem;
     }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero {
+        padding: 100px 16px 30px;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .hero-image {
+        width: 180px;
+        height: 180px;
+    }
+
+    .nav-brand {
+        font-size: 1.25rem;
+    }
+
+    .nav-menu {
+        padding: 1.5rem;
+    }
+
+    .projects-grid,
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1097,4 +1233,99 @@ section {
     .btn {
         width: 100%;
     }
+
+    .nav-brand {
+        font-size: 1.15rem;
+    }
+
+    .mobile-toggle span {
+        width: 22px;
+    }
 }
+
+/* Touch & accessibility improvements */
+.btn,
+.nav-link,
+.social-links a {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible,
+.project-link:focus-visible,
+.social-links a:focus-visible {
+    outline: 3px solid rgba(102,126,234,0.18);
+    outline-offset: 3px;
+}
+
+/* Increase tap areas on small devices */
+@media (max-width: 600px) {
+    .btn {
+        padding: 16px 20px;
+        font-size: 1rem;
+    }
+
+    .nav-link {
+        padding: 12px 0;
+        font-size: 1rem;
+    }
+
+    .social-links a {
+        width: 64px;
+        height: 64px;
+        font-size: 1.6rem;
+    }
+}
+
+/* Improve touch interactions */
+button,
+a,
+.btn,
+.nav-link {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Reduce or disable animations on touch devices to improve performance */
+.reduced-animations *,
+.reduced-animations *::before,
+.reduced-animations *::after {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Project overlay: support hover on desktop and tap-to-toggle on touch devices */
+.project-overlay {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.project-card.overlay-active .project-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Ensure form inputs and buttons are large enough on touch */
+@media (max-width: 600px) {
+    .form-group input,
+    .form-group textarea {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+}
+  

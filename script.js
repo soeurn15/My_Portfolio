@@ -32,8 +32,21 @@ const mobileToggle = document.getElementById('mobileToggle');
 const navMenu = document.getElementById('navMenu');
 
 mobileToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
+    const isActive = navMenu.classList.toggle('active');
     mobileToggle.classList.toggle('active');
+    mobileToggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+    // prevent background scroll when menu is open on mobile
+    try {
+        if (isActive && window.bodyScrollLock && typeof bodyScrollLock.disableBodyScroll === 'function') {
+            bodyScrollLock.disableBodyScroll(navMenu);
+        } else if (!isActive && window.bodyScrollLock && typeof bodyScrollLock.enableBodyScroll === 'function') {
+            bodyScrollLock.enableBodyScroll(navMenu);
+        } else {
+            document.body.style.overflow = isActive ? 'hidden' : '';
+        }
+    } catch (err) {
+        document.body.style.overflow = isActive ? 'hidden' : '';
+    }
 });
 
 // Close mobile menu when clicking on a link
@@ -41,7 +54,52 @@ document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
         mobileToggle.classList.remove('active');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        try {
+            if (window.bodyScrollLock && typeof bodyScrollLock.enableBodyScroll === 'function') {
+                bodyScrollLock.enableBodyScroll(navMenu);
+            } else {
+                document.body.style.overflow = '';
+            }
+        } catch (err) {
+            document.body.style.overflow = '';
+        }
     });
+});
+
+// Close mobile menu on resize or orientation change to avoid stuck overlays
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        mobileToggle.classList.remove('active');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        try {
+            if (window.bodyScrollLock && typeof bodyScrollLock.enableBodyScroll === 'function') {
+                bodyScrollLock.enableBodyScroll(navMenu);
+            } else {
+                document.body.style.overflow = '';
+            }
+        } catch (err) {
+            document.body.style.overflow = '';
+        }
+    }
+});
+
+window.addEventListener('orientationchange', () => {
+    if (navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        mobileToggle.classList.remove('active');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        try {
+            if (window.bodyScrollLock && typeof bodyScrollLock.enableBodyScroll === 'function') {
+                bodyScrollLock.enableBodyScroll(navMenu);
+            } else {
+                document.body.style.overflow = '';
+            }
+        } catch (err) {
+            document.body.style.overflow = '';
+        }
+    }
 });
 
 // ==================== SMOOTH SCROLLING ====================
@@ -327,6 +385,38 @@ if (getInTouchBtn) {
         if (navMenu.classList.contains('active')) {
             navMenu.classList.remove('active');
             mobileToggle.classList.remove('active');
+        }
+    });
+}
+
+// ==================== TOUCH DEVICE ENHANCEMENTS ====================
+// Add `touch` class to body for CSS hooks and enable tap-to-toggle for project overlays
+function isTouchDevice() {
+    return ('ontouchstart' in window) || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+}
+
+if (isTouchDevice()) {
+    document.body.classList.add('touch');
+    // Reduce heavy animations for better performance on touch devices
+    document.body.classList.add('reduced-animations');
+
+    // Allow tapping a project card to toggle its overlay on touch devices
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            // If the user clicked a link or button inside the card, don't toggle
+            const target = e.target;
+            if (target.closest('a') || target.closest('button')) return;
+
+            card.classList.toggle('overlay-active');
+        });
+    });
+
+    // Close overlays when tapping outside
+    document.addEventListener('click', (e) => {
+        const openCard = document.querySelector('.project-card.overlay-active');
+        if (!openCard) return;
+        if (!e.target.closest('.project-card')) {
+            openCard.classList.remove('overlay-active');
         }
     });
 }
